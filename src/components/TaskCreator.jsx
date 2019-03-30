@@ -1,43 +1,53 @@
 import React, { useState, useEffect } from 'react';
 
+import { MainContext } from './MainProvider';
+
 const TaskCreator = props => {
     const [inputValue, setInputValue] = useState('');
-    const [creatingTask, setCreatingTask] = useState(false);
+    // const [creatingTask, setCreatingTask] = useState(false);
 
-    const handleAddTaskClick = () => {
-        console.log( 'new task created: ', inputValue );
+    // const handleAddTaskClick = () => {
+    //     console.log( 'new task created: ', inputValue );
         
-        // create new task, add to global state
+    //     // create new task, add to global state
 
-        setCreatingTask(false);
-        setInputValue( '' );
-    };
+    //     setCreatingTask(false);
+    //     setInputValue( '' );
+    // };
     
-    useEffect( () => {
-        if ( creatingTask ) handleAddTaskClick();
-    } );
+    // useEffect( () => {
+    //     if ( creatingTask ) handleAddTaskClick();
+    // } );
 
     return (
-        <div id="task-creator">
+        <MainContext.Consumer>
+            { context => {
+                const handleAddTask = () => {
+                    context.addTask( inputValue );
+                    setInputValue('');
+                }
 
-            <input 
-                type="text" 
-                id="task-input" 
-                placeholder="Enter task title..."
-                value={inputValue}
-                onChange={(event) => { setInputValue(event.target.value) }}
-                onKeyPress={(event) => { event.which === 13 ? setCreatingTask(true) : false }}
-            />
-
-            <button 
-                id="create-task" 
-                className="btn"
-                onClick={() => { setCreatingTask(true) }} 
-            >
-                    Add Task
-            </button>
-
-        </div>
+                return (
+                    <div id="task-creator">
+                        <input 
+                            type="text" 
+                            id="task-input" 
+                            placeholder="Enter task title..."
+                            value={inputValue}
+                            onChange={(event) => { setInputValue(event.target.value) }}
+                            onKeyPress={(event) => { event.which === 13 ? handleAddTask() : false }}
+                        />
+                        <button 
+                            id="create-task" 
+                            className="btn"
+                            onClick={() => handleAddTask()} 
+                        >
+                                Add Task
+                        </button>
+                    </div>
+                );
+            }}
+        </MainContext.Consumer>
     );
 }
 
