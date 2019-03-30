@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 
+import { NavLink } from 'react-router-dom';
+
 const ToDo = props => {
     return (
         <div className="task-wrap">
@@ -9,7 +11,7 @@ const ToDo = props => {
                 <span className="task-title">Task title here</span>
             </div>
             <div className="task-links">
-                <a href="/details" className="btn task-details">Details</a>
+                <NavLink to="/details/5" className="btn task-details">Details</NavLink>
                 <span className="delete-task btn-border">x</span>
             </div>
         </div>

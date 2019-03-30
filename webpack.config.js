@@ -7,6 +7,7 @@ module.exports = {
     output: {
         path: path.resolve( __dirname, 'dist/js'),
         filename: 'main.js',
+        publicPath: '/'
     },
     
     resolve: { 
@@ -20,12 +21,14 @@ module.exports = {
         publicPath: '/js/',
         port: 8080,
         watchContentBase: true,
-        compress: true
+        compress: true,
+        historyApiFallback: true
     },
     
     module: {
         rules: [
-            { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }
+            { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' },
+            { test: /\.css$/, exclude: /node_modules/, use: ['style-loader', 'css-loader'] },
         ]
     },
     
