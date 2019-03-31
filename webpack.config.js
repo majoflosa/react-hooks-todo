@@ -22,7 +22,10 @@ module.exports = {
         port: 8080,
         watchContentBase: true,
         compress: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        disableHostCheck: true,
+        open: true,
+        host: 'develop.site'
     },
     
     module: {
