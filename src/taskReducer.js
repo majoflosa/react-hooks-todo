@@ -27,7 +27,8 @@ export const initialState = {
             description: 'Phasellus metus tellus, venenatis mollis consequat sit amet, volutpat rhoncus nulla.' 
         },
     ],
-    taskIndex: 5
+    taskIndex: 5,
+    stuff: []
 }
 
 export const taskReducer = (state, action) => {
@@ -43,6 +44,14 @@ export const taskReducer = (state, action) => {
                 tasks: [...state.tasks, newTask], 
                 taskIndex: state.taskIndex + 1
             };
+        
+        case 'GET_STUFF':
+            console.log( 'get stuff case: ', action.payload );
+            return {
+                ...state,
+                stuff: action.payload
+            };
+        
         default:
             return state;
     };
